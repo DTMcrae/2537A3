@@ -88,7 +88,6 @@ const filter = async () => {
             filtered_lists.push(response.data.pokemon);
         }
 
-        if(filtered_lists.length > 1)console.log(filtered_lists[1].map((pokemon) => pokemon.pokemon));
         for(var x = 0; x < filtered_lists[0].length; x++)
         {
             var result = true;
@@ -113,8 +112,6 @@ const filter = async () => {
     pokemons = filtered_pokemons;
 
     numPages = Math.ceil(pokemons.length / PAGE_SIZE);
-
-    console.log("Numpages: " + numPages);
 
     currentPage = 1;
     paginate(1, PAGE_SIZE, pokemons);
@@ -153,11 +150,8 @@ const setup = async () => {
     // add event listener to each pokemon card
     $('body').on('click', '.pokeCard', async function (e) {
         const pokemonName = $(this).attr('pokeName')
-        // console.log("pokemonName: ", pokemonName);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-        // console.log("res.data: ", res.data);
         const types = res.data.types.map((type) => type.type.name)
-        console.log("types: ", types);
         $('.modal-body').html(`
         <div style="width:200px">
         <img src="${res.data.sprites.other['official-artwork'].front_default}" alt="${res.data.name}"/>
@@ -191,8 +185,6 @@ const setup = async () => {
 
     //add event listener to filters
     $('body').on('click', '.pokeType', async function(e) {
-        console.log("Clicked: " + e.target.id);
-        console.log("Status: " + e.target.children[0].checked);
 
         if(!e.target.children[0].checked)
         {
@@ -203,7 +195,6 @@ const setup = async () => {
             filters.splice(filters.indexOf(e.target.id),1);
         }
 
-        console.log(filters);
         filter();
     })
 
