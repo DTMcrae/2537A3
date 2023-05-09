@@ -8,8 +8,6 @@ const updatePaginationDiv = (currentPage, numPages) => {
 
     var startPage = Math.max(1, currentPage - 2);
     var endPage = Math.min(startPage + 4, numPages);
-    console.log("startPage: ", startPage);
-    console.log("endPage: ", endPage);
 
     if(endPage - startPage < 4) startPage = (endPage - 4);
 
@@ -24,9 +22,18 @@ const updatePaginationDiv = (currentPage, numPages) => {
     }
 
     for (let i = startPage; i <= endPage; i++) {
-        $('#pagination').append(`
-    <button class="btn btn-primary page ml-1 numberedButtons" value="${i}">${i}</button>
-    `)
+        if(i == currentPage)
+        {
+            $('#pagination').append(`
+            <button class="btn btn-secondary page ml-1 numberedButtons" value="${i}">${i}</button>
+            `);
+        }
+        else
+        {
+            $('#pagination').append(`
+            <button class="btn btn-primary page ml-1 numberedButtons" value="${i}">${i}</button>
+            `);
+        }
     }
 
     if(currentPage != numPages)
