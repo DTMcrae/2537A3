@@ -18,6 +18,9 @@ const updatePaginationDiv = (currentPage, numPages) => {
     $('#pagination').append(`
     <button class="btn btn-primary page ml-1 numberedButtons" value="1">First</button>
     `);
+    $('#pagination').append(`
+    <button class="btn btn-primary page ml-1 numberedButtons" value="${currentPage - 1}">Prev</button>
+    `);
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -25,9 +28,12 @@ const updatePaginationDiv = (currentPage, numPages) => {
     <button class="btn btn-primary page ml-1 numberedButtons" value="${i}">${i}</button>
     `)
     }
-    
+
     if(currentPage != numPages)
     {
+    $('#pagination').append(`
+    <button class="btn btn-primary page ml-1 numberedButtons" value="${currentPage + 1}">Next</button>
+    `);
     $('#pagination').append(`
     <button class="btn btn-primary page ml-1 numberedButtons" value="${numPages}">Last</button>
     `);
